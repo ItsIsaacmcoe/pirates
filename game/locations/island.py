@@ -2,6 +2,7 @@
 from game import location
 from game import config
 from game.display import announce
+from game.events import *
 
 class Island (location.Location):
 
@@ -20,6 +21,7 @@ class Island (location.Location):
 
     def visit (self):
         config.the_player.location = self.starting_location
+        config.the_player.location.enter()
         super().visit()
 
 class Beach_with_ship (location.SubLocation):
@@ -30,13 +32,17 @@ class Beach_with_ship (location.SubLocation):
         self.verbs['south'] = self
         self.verbs['east'] = self
         self.verbs['west'] = self
+        self.event_chance = 50
+        self.events.append (seagull.Seagull())
+        self.events.append(drowned_pirates.DrownedPirates())
 
-    def enter (self, ship):
+    def enter (self):
         announce ("arrive at the beach. Your ship is at anchor in a small bay to the south.")
     
     def process_verb (self, verb, cmd_list, nouns):
         if (verb == "south"):
             announce ("You return to your ship.")
+            config.the_player.next_loc = config.the_player.ship
             config.the_player.visiting = False
         elif (verb == "north"):
             config.the_player.next_loc = self.main_location.locations["trees"]
@@ -52,8 +58,11 @@ class Trees (location.SubLocation):
         self.verbs['south'] = self
         self.verbs['east'] = self
         self.verbs['west'] = self
+        self.event_chance = 50
+        self.events.append(man_eating_monkeys.ManEatingMonkeys())
+        self.events.append(drowned_pirates.DrownedPirates())
 
-    def enter (self, ship):
+    def enter (self):
         announce ("You walk into the small forest on the island. Nothing around here looks very edible.")
     
     def process_verb (self, verb, cmd_list, nouns):
