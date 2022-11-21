@@ -58,7 +58,7 @@ class Combat():
                 options = []
                 if "brawling" in moving.skills.keys():
                     options.append("punch")
-                    attacks.append(Attack("punch", "punches", moving.skills["brawling"], (1,11)))
+                    attacks.append(Attack("punch", "punches", moving.skills["brawling"], (10,35)))
                     items.append(None)
                 for i in moving.items:
                     if i.damage[1] > 0 and i.verb != None and i.skill in moving.skills.keys() and (i.firearm == False or i.charge == True):
