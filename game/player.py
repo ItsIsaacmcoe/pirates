@@ -83,7 +83,7 @@ class Player (Context):
             for c in self.get_pirates():
                 c.print_skills ()
         elif (verb == "help"):
-            announce("This will soon be a list of possible commands")
+            announce("Essentials:\n'help'---this menu\n'quit'---exits the game\nBasics:\n'map'---displays the map\n'go'---used like 'go north' 'go west' to move around the map\n'status'---check current stats of the crew and ship")
         elif (verb == "save"):
             if "jsonpickle" not in sys.modules:
                 announce ("jsonpickle hasn't be imported. Saving is impossible.")
@@ -102,7 +102,7 @@ class Player (Context):
                 announce ("Loading is only possible abord ship.")
             else:
                 with open ("save.json") as f:
-                    s = f.read()    
+                    s = f.read()
                 config.the_player = jsonpickle.decode (s)
                 self.go = True
         elif (verb == "status"):
