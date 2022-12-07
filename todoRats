@@ -1,0 +1,6 @@
+have a flag on the ship config.the_player.ship called rats
+base off of sickness
+
+need to have handeling for the food eating at end of turn code which can be found by grepping for 'git_hunger'
+
+add the ability to chase the rats off in ships verbs
